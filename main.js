@@ -1,0 +1,1 @@
+//runRobotAnimation(VillageState.random(), goalOrientedRobot, []);
