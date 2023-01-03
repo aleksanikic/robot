@@ -26,37 +26,55 @@ function addEdge(from,to,graph){
 const roadGraph = buildGraph(roads);
 
 class VillageState {
-  constructor(place, parcels) {
-    this.place = place;
-    this.parcels = parcels;
+  constructor(robotLocation, undeliveredParcels) {
+    this.robotLocation = robotLocation;
+    this.undeliveredParcels = undeliveredParcels;
   }
 
-  move(destination) {
-    if (!roadGraph[this.place].includes(destination)) {
+  move(nextLocation) {
+    if (!arePlacesConnected(this.robotLocation, nextLocation)) {
       return this;
     } else {
-      let parcels = this.parcels.map(p => {
-        if (p.place != this.place) return p;
-        return {place: destination, address: p.address};
-      }).filter(p => p.place != p.address);
-      return new VillageState(destination, parcels);
+      let undeliveredParcels = this.deliverParcels(nextLocation);
+      return new VillageState(nextLocation, undeliveredParcels);
     }
+  }
+  
+  deliverParcels(location) {
+    this.undeliveredParcels.map(parcel => {
+      if (parcel.parcelLocation !== this.robotLocation) return parcel;
+      return {...parcel, parcelLocation: location};
+    }).filter(parcel => parcel.parcelLocation !== parcel.parcelAddress);
+  }
+
+  arePlacesConnected(a, b) {
+    return roadGraph[a].includes(b);
+  }
+
+  random() {
+    let undeliveredParcels = this.randomParcels();
+    return new VillageState("Post Office", undeliveredParcels);
+  }
+
+  randomParcels(parcelCount = 5) {
+    let parcels = []
+    for (let i = 0; i < parcelCount; i++) {
+      let parcelAddress = randomPick(Object.keys(roadGraph));
+      let parcelLocation 
+        for(let i = 0; ; i++){
+          parcelLocation  = randomPick(Object.keys(roadGraph));
+          if(parcelAddress !== parcelLocation){
+            parcels.push({parcelLocation, parcelAddress})
+            break;
+          }
+        }
+    }
+    return parcels
   }
 }
 
-VillageState.random = function(parcelCount = 5) {
-  let parcels = [];
-  for (let i = 0; i < parcelCount; i++) {
-    let address = randomPick(Object.keys(roadGraph));
-    let place 
-      for(let i = 0; ; i++){
-        place  = randomPick(Object.keys(roadGraph));
-        if(address !== place){
-          parcels.push({place, address})
-          break;
-        }
-      }
-  }
-  return new VillageState("Post Office", parcels);
-};
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
 
