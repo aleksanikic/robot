@@ -57,7 +57,7 @@
 
 
       updateView() {
-        let pos = places[this.worldState.place]
+        let pos = places[this.worldState.robotLocation]
         this.robotElt.style.top = (pos.y - 38) + "px"
         this.robotElt.style.left = (pos.x - 16) + "px"
 
@@ -67,18 +67,18 @@
       updateParcels() {
         while (this.parcels.length) this.parcels.pop().remove()
         let heights = {}
-        for (let {place, address} of this.worldState.parcels) {
-          let height = heights[place] || (heights[place] = 0)
-          heights[place] += 14
+        for (let {parcelLocation, parcelAddress} of this.worldState.undeliveredParcels) {
+          let height = heights[parcelLocation] || (heights[parcelLocation] = 0)
+          heights[parcelLocation] += 14
           let node = document.createElement("div")
-          let offset = placeKeys.indexOf(address) * 16
+          let offset = placeKeys.indexOf(parcelAddress) * 16
           node.style.cssText = "position: absolute; height: 16px; width: 16px; background-image: url(http://eloquentjavascript.net/img/parcel2x.png); background-position: 0 -" + offset + "px";
-          if (place == this.worldState.place) {
+          if (parcelLocation == this.worldState.robotLocation) {
             node.style.left = "25px"
             node.style.bottom = (20 + height) + "px"
             this.robotElt.appendChild(node)
           } else {
-            let pos = places[place]
+            let pos = places[parcelLocation]
             node.style.left = (pos.x - 5) + "px"
             node.style.top = (pos.y - 10 - height) + "px"
             this.node.appendChild(node)
@@ -88,12 +88,12 @@
       }
 
       tick() {
-        let {direction, memory} = this.robot(this.worldState, this.robotState)
-        this.worldState = this.worldState.move(direction)
+        let {destination, memory} = this.robot(this.worldState, this.robotState)
+        this.worldState = this.worldState.move(destination)
         this.robotState = memory
         this.turn++
         this.updateView()
-        if (this.worldState.parcels.length == 0) {
+        if (this.worldState.undeliveredParcels.length == 0) {
           this.button.remove()
           this.text.textContent = ` Finished after ${this.turn} turns`
           this.robotElt.firstChild.src = "http://eloquentjavascript.net/img/robot_idle2x.png"
