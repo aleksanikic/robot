@@ -97,6 +97,33 @@ function routeRobot(state, memory) {
   return {destination: memory[0], memory: memory.slice(1)};
 }
 
+function goalOrientedRobot(state, route) {
+  if (route.length === 0) {
+    let parcel = state.undeliveredParcels[0];
+    console.log('parcel at', parcel.parcelLocation, 'deliver to', parcel.parcelAddress);
+    if (state.robotLocation === parcel.parcelLocation) {
+      route = findRoute(roadGraph, state.robotLocation, parcel.parcelAddress);
+    } else {
+      route = findRoute(roadGraph, state.robotLocation, parcel.parcelLocation);
+    }
+  }
+  return {destination: route[0], memory: route.slice(1)};
+}
+
+function findRoute(graph, from, to) {
+  let work = [{at: from, route: []}];
+  for (let i = 0; i < work.length; i++) {
+    for (let place of graph[work[i].at]) {
+      if (place === to) {
+        return work[i].route.concat(place);
+      }
+      if (!work.some((el) => el.at === place)) {
+        work.push({at: place, route: work[i].route.concat(place)})
+      }
+    }
+  }
+}
+
 
 
 
@@ -114,5 +141,5 @@ function routeRobot(state, memory) {
 //   }
 // }
 
-// runRobot(VillageState.random(), randomRobot)
+// runRobot(VillageState.random(), goalOrientedRobot, [])
 
