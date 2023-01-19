@@ -1,1 +1,1 @@
-runRobotAnimation(VillageState.random(), goalOrientedRobot, []);
+runRobotAnimation(VillageState.random(), betterGoalRobot, []);
