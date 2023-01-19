@@ -7,7 +7,7 @@ We have 4 different robots:
     ![route robot](https://github.com/aleksanikic/robot/blob/master/gif-robot/routerobot.gif)  
     3.Goal oriented robot: it calculates quickest way to the next parcel or address.  
     ![goal oriented robot](https://github.com/aleksanikic/robot/blob/master/gif-robot/goalorientedrobot.gif)  
-    4.Better goal robot: it calulates quickest route and then it starts moving.  
+    4.Better goal robot: it calculates quickest route and then it starts moving.  
     ![better goal robot](https://github.com/aleksanikic/robot/blob/master/gif-robot/bettergoalrobot.gif)  
 
 ### How to run the program
