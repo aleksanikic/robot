@@ -25,7 +25,7 @@ The final graph data:
   } 
 */
 
-const mailRoute = [
+export const mailRoute = [
   "Alice's House", "Cabin", "Alice's House", "Bob's House",
   "Town Hall", "Daria's House", "Ernie's House",
   "Grete's House", "Shop", "Grete's House", "Farm",
@@ -58,4 +58,4 @@ function addEdge(from, to, graph) {
     graph[from].push(to)
   }
 }
-const roadGraph = buildGraph(roads);
+export const roadGraph = buildGraph(roads);

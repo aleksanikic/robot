@@ -1,9 +1,9 @@
-function randomPick(array) {
+export function randomPick(array) {
   let choice = Math.floor(Math.random() * array.length);
   return array[choice];
 }
 
-function findRoute(graph, from, to) {
+export function findRoute(graph, from, to) {
   let work = [{at: from, route: []}];
   for (let i = 0; i < work.length; i++) {
     for (let place of graph[work[i].at]) {
@@ -17,7 +17,7 @@ function findRoute(graph, from, to) {
   }
 }
 
-function runRobot(state, robot, memory) {
+export function runRobot(state, robot, memory) {
   for (let turn = 0;; turn++) {
     if (state.undeliveredParcels.length === 0) {
       console.log(`Done in ${turn} turns`);

@@ -1,4 +1,7 @@
-class VillageState {
+import { randomPick } from "./helperFunctions.js";
+import { roadGraph } from "./roadGraph.js";
+
+export class VillageState {
   constructor(robotLocation, undeliveredParcels) {
     this.robotLocation = robotLocation;
     this.undeliveredParcels = undeliveredParcels;

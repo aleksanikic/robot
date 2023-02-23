@@ -1,15 +1,18 @@
-function randomRobot(state) {
+import { findRoute, randomPick } from "./helperFunctions.js";
+import { mailRoute, roadGraph } from "./roadGraph.js";
+
+export function randomRobot(state) {
   return {destination: randomPick(roadGraph[state.robotLocation])};
 }
 
-function routeRobot(state, memory) {
+export function routeRobot(state, memory) {
   if (memory.length == 0) {
     memory = mailRoute;
   }
   return {destination: memory[0], memory: memory.slice(1)};
 }
 
-function goalOrientedRobot(state, route) {
+export function goalOrientedRobot(state, route) {
   if (route.length === 0) {
     let parcel = state.undeliveredParcels[0];
     console.log('parcel at', parcel.parcelLocation, 'deliver to', parcel.parcelAddress);
@@ -22,7 +25,7 @@ function goalOrientedRobot(state, route) {
   return {destination: route[0], memory: route.slice(1)};
 }
   
-function betterGoalRobot(state, route) {
+export function betterGoalRobot(state, route) {
   if (route.length === 0) {
     let routes = state.undeliveredParcels.map(
       parcel => {
