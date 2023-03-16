@@ -1,5 +1,5 @@
-import { findRoute, randomPick } from "./helperFunctions.js";
-import { mailRoute, roadGraph } from "./roadGraph.js";
+import { findRoute, randomPick } from "./helperFunctions.mjs";
+import { mailRoute, roadGraph } from "./roadGraph.mjs";
 
 export function randomRobot(state) {
   return {destination: randomPick(roadGraph[state.robotLocation])};

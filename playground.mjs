@@ -1,5 +1,5 @@
-import { runRobot } from "./helperFunctions.js"
-import { VillageState } from "./villageState.js"
+import { runRobot } from "./helperFunctions.mjs"
+import { VillageState } from "./villageState.mjs"
 
 function compareRobot(robot1, memory1, robot2, memory2) {
   let robot1Turns = 0

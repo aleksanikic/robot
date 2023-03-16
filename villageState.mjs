@@ -1,5 +1,5 @@
-import { randomPick } from "./helperFunctions.js";
-import { roadGraph } from "./roadGraph.js";
+import { randomPick } from "./helperFunctions.mjs";
+import { roadGraph } from "./roadGraph.mjs";
 
 export class VillageState {
   constructor(robotLocation, undeliveredParcels) {
