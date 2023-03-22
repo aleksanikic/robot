@@ -11,5 +11,5 @@ We have 4 different robots:
     ![better goal robot](https://github.com/aleksanikic/robot/blob/master/gif-robot/bettergoalrobot.gif)  
 
 ### How to run the program
-Open index.html file.  
+In terminal type node .  
 In main.js you can switch the robot.  
